@@ -1,0 +1,344 @@
+/***
+**common css style
+ */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    -moz-user-select: none; /*火狐*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -ms-user-select: none; /*IE10*/
+    -khtml-user-select: none; /*早期浏览器*/
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Microsoft YaHei, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 200;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.8rem;
+}
+
+h6 {
+    font-size: 0.6rem;
+}
+
+h3, h4, h5 {
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+header, nav, aside, article, footer {
+    display: block;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.ovf {
+    overflow: hidden;
+}
+
+.show {
+    display: inline-block !important;
+    margin-left: 5px;
+    line-height: 35px;
+}
+
+.shown {
+    display: inline-block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #595a59;
+    cursor: pointer;
+}
+
+.mr0 {
+    margin-right: 0 !important;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #aaaaaa;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #aaaaaa;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #aaaaaa;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #aaaaaa;
+}
+
+.clearfix:after {
+    content: "."; /*内容为“.”就是一个英文的句号而已。也可以不写。*/
+    display: block; /*加入的这个元素转换为块级元素。*/
+    clear: both; /*清除左右两边浮动。*/
+    visibility: hidden; /*可见度设为隐藏。注意它和display:none;是有区别的。visibility:hidden;仍然占据空间，只是看不到而已；*/
+    line-height: 0; /*行高为0；*/
+    height: 0; /*高度为0；*/
+    font-size: 0; /*字体大小为0；*/
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+/***************************************************************************/
+/**page css style***/
+#root {
+    height: 100%;
+}
+
+.wraper {
+    height: 100%;
+}
+
+.topheader {
+    background: #001529;
+    padding: 0px;
+    height: 64px;
+    line-height: 64px;
+}
+
+.triggerbtn {
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    line-height: 50px;
+    padding: 0 20px;
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+}
+
+.hastopheaderwraper .triggerbtn {
+    top: 64px;
+}
+
+.breadcrumbpath {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.hastopheaderwraper .breadcrumbpath {
+    /*top: 124px;*/
+}
+
+.pagewraper {
+    margin-left: 200px;
+    margin-top: 50px;
+}
+
+.enablecollapsebar.ant-layout-sider-collapsed + .pagewraper {
+    margin-left: 80px;
+}
+
+.pagecontentwraper {
+    display: flex;
+}
+
+.maincontent {
+    margin: 0 20px;
+    flex: 1;
+    min-height: 400px;
+    height: 100%;
+}
+
+.contentheader {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 16px;
+}
+
+.pageheader {
+    margin: 0 -20px;
+    background: #fff;
+    padding: 16px 32px 0 32px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.pagecontent {
+    background: #fff;
+    margin-top: 20px;
+    padding: 20px 30px;
+    position: relative;
+}
+
+.registerform {
+    max-width: 44%;
+    padding-top: 10px;
+    position: relative;
+}
+
+.numberinput {
+    width: 100%;
+}
+
+.showpwdbtn {
+    width: 100%;
+}
+
+a.addappbtn, a.addappbtn:link {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0 15px;
+    border-radius: 4px;
+    background: #1890ff;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+a.addappbtn:hover {
+    color: #f2f2f2;
+    -webkit-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -o-transition: color 0.2s;
+    transition: color 0.2s;
+
+}
+
+.addbtnicon {
+    margin-right: 10px;
+}
+
+.portinput {
+    height: 30px;
+    border: 0;
+}
+
+.ant-form legend {
+    display: block;
+    padding: 0;
+    margin-bottom: 24px;
+    font-size: 20px;
+    line-height: inherit;
+    color: rgb(39, 39, 39);
+    border: 0;
+}
+
+.inputgroup .ant-input-group-wrapper {
+    top: 0;
+}
+
+.formlastitem {
+    margin-top: 60px;
+}
+
+.divider {
+    height: 0;
+    border-bottom: 1px solid #e8e8e8;
+    position: absolute;
+    bottom: 100px;
+    width: 96%;
+}
+
+.custom-filter-dropdown {
+    padding: 8px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+.custom-filter-dropdown input {
+    width: 130px;
+    margin-right: 8px;
+}
+
+.highlight {
+    color: #f50;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child {
+    padding: 0 48px 0 8px;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-thead th {
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-thead th:first-child {
+    padding-left: 0;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-row td:first-child {
+    padding-left: 0;
+}
+
+.components-table-demo-nested .ant-table-expanded-row .ant-table-row:last-child td {
+    border: none;
+}
+
+.components-table-demo-nested .ant-table-expanded-row .ant-table-thead > tr > th {
+    background: none;
+}
+
+.components-table-demo-nested .table-operation a:not(:last-child) {
+    margin-right: 24px;
+}
+
+.components-table-demo-nested .ant-table-expanded-row:hover > td {
+    background: #fbfbfb;
+}
+
+@media (max-width: 500px) {
+    .enablecollapsebar.ant-layout-sider-collapsed {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    .enablecollapsebar.ant-layout-sider-collapsed + .pagewraper {
+        margin-left: 0;
+    }
+}
+
