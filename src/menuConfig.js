@@ -28,22 +28,22 @@ const customHeaderNavs = [
 
 const customAsideNavs = [
   {
-    name: '应用接入',
-    path: '/application',
+    name: '云+分析',
+    path: '/cloudplus',
     icon: 'home',
     children: [
       {
-        name: '申请接入',
-        path: '/application/register',
+        name: '概览',
+        path: '/cloudplus/index',
       },
       {
-        name: '应用管理',
-        path: '/application/manage',
+        name: '客户端版本情况',
+        path: '/cloudplus/index/enterprise',
       },
     ],
   },
   {
-    name: '路由管理',
+    name: 'GS应用分析',
     path: '/routermanage',
     icon: 'fork',
     children: [
@@ -52,38 +52,38 @@ const customAsideNavs = [
       //   path: '/routermanage/routerregister',
       // },
       {
-        name: '路由查询管理',
+        name: '企业列表',
         path: '/routermanage/see',
       },
     ],
   },
   {
-    name: '账户管理',
+    name: '移动应用分析',
     path: '/accountmanage',
     icon: 'database',
     children: [
       {
-        name: '创建账户',
+        name: '概览',
         path: '/accountmanage/create',
       },
       {
-        name: '账户查看',
+        name: '企业使用情况',
         path: '/accountmanage/see',
       },
     ],
   },
   {
-    name: '系统设置',
+    name: '用户反馈',
     path: '/setting',
     icon: 'setting',
     children: [
       {
-        name: '基本设置',
+        name: '问题列表',
         path: '/setting/base/111',
         query: {id: "111", name: "lilian", sex: "femail"},
       },
       {
-        name: '评论设置',
+        name: '反馈分布',
         path: '/setting/comment',
       },
     ],

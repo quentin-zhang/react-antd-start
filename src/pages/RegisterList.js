@@ -85,8 +85,8 @@ export default class RegisterList extends React.Component {
         state: 'PENDING',
       }];
     const breadcrumb = [
-      {text: '应用接入', link: ''},
-      {text: '申请接入', link: '#/application/register'},
+      {text: '云+分析', link: ''},
+      {text: '概览', link: '#/application/register'},
     ];
     return (
       <Content className="maincontent">

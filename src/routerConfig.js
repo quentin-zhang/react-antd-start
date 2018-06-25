@@ -13,8 +13,27 @@ import ApplicationManage from './pages/ApplicationManage';
 import RouterRegister from './pages/RouterRegister';
 import RouterList from './pages/RouterList';
 import CreateAccount from './pages/CreateAccount';
+import HomePage from './pages/HomePage';
+import CloudPlusEnterprise from './pages/CloudPlusEnterprise';
 
 const routerConfig = [
+  {
+    path: '/cloudplus',
+    layout: HeaderAsideResponsiveLayout,
+    page: HomePage,
+    children: [
+      {
+        path: '/index',
+        layout: HeaderAsideResponsiveLayout,
+        page: HomePage,
+      },
+      {
+        path: '/index/enterprise',
+        layout: HeaderAsideResponsiveLayout,
+        page: CloudPlusEnterprise,
+      }
+    ],
+  },
   {
     path: '/application',
     layout: HeaderAsideResponsiveLayout,
