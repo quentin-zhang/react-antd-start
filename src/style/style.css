@@ -213,6 +213,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     padding: 20px 30px;
     position: relative;
     z-index: 2;
+    overflow-y:hidden;
 }
 
 .registerform {

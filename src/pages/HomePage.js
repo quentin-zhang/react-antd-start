@@ -1,9 +1,9 @@
 import React from 'react';
-import { Layout, Form } from 'antd';
+import { Layout, Form, Row, Col } from 'antd';
 import ContentHeader from './../components/ContentHeader';
-import { Chart, Geom, Axis, Tooltip, Coord, Label, Legend, Guide, Html } from "bizcharts";
-import { View, DataSet } from '@antv/data-set';
-import { GetPVChangeURL, GetEnterpriseInfoURL,GetDeviceRatioURL } from './../util/const';
+import { Chart, Geom, Axis, Tooltip, Coord, Label, Legend } from "bizcharts";
+import { View } from '@antv/data-set';
+import { GetPVChangeURL, GetEnterpriseInfoURL, GetDeviceRatioURL, GetFunctionTopURL } from './../util/const';
 import moment from 'moment';
 
 const { Content } = Layout;
@@ -21,9 +21,7 @@ class RegistrationForm extends React.Component {
       EnterpriseCount: 0,
       ECMUsers: 0,
       ActiveUserCount: 0,
-      DeviceCount: 0,
-      AndroidCount:0,
-      iOSCount:0
+      DeviceCount: 0
     };
   }
 
@@ -60,9 +58,22 @@ class RegistrationForm extends React.Component {
 
   componentDidMount() {
     let that = this;
-    const aurl = GetPVChangeURL;
-    const epURL = GetEnterpriseInfoURL;
+    //注册企业数、注册用户数、活跃用户数、移动设备数
 
+    fetch(GetEnterpriseInfoURL)
+      .then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        that.setState({ EnterpriseCount: data.EnterpriseCount });
+        that.setState({ ECMUsers: data.ECMUsers });
+        that.setState({ ActiveUserCount: data.ActiveUserCount });
+        that.setState({ DeviceCount: data.DeviceCount });
+      });
+    //PV趋势图
     var formData = new FormData();
     let startTime = moment().subtract(31, 'days').format('YYYY-MM-DD');
     let endTime = moment().format('YYYY-MM-DD');
@@ -71,14 +82,25 @@ class RegistrationForm extends React.Component {
     formData.append('timeType', 'dayFormat');
     formData.append('projectName', 'INSPURECM');
 
-//     let param1 = {'startTime':startTime,
-//   'endTime':endTime,
-// 'timeType':'dayFormat',
-// 'projectName':'INSPURECM'};
-    const adata = {
+    const countData = {
       method: 'POST',
       body: formData
     };
+    fetch(GetPVChangeURL, countData)
+      .then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        for (var obj of data) {
+          obj.ViewCount = Number.parseInt(obj.ViewCount, 10);
+        }
+        that.setState({ chartdata: data });
+      });
+
+    //移动设备对比
     let vdata = [
       { item: 'iOS设备', count: 0 },
       { item: '安卓设备', count: 0 }
@@ -98,35 +120,7 @@ class RegistrationForm extends React.Component {
         }
       }
     };
-debugger;
-    fetch(aurl, adata)
-      .then(function (response) {
-        if (response.status >= 400) {
-          throw new Error("Bad response from server");
-        }
-        return response.json();
-      })
-      .then(function (data) {
-        for (var obj of data) {
-          obj.ViewCount = Number.parseInt(obj.ViewCount);
-        }
-        that.setState({ chartdata: data });
-      });
-
-    fetch(epURL)
-      .then(function (response) {
-        if (response.status >= 400) {
-          throw new Error("Bad response from server");
-        }
-        return response.json();
-      })
-      .then(function (data) {
-        that.setState({ EnterpriseCount: data.EnterpriseCount });
-        that.setState({ ECMUsers: data.ECMUsers });
-        that.setState({ ActiveUserCount: data.ActiveUserCount });
-        that.setState({ DeviceCount: data.DeviceCount });
-      });
-      fetch(GetDeviceRatioURL)
+    fetch(GetDeviceRatioURL)
       .then(function (response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -148,8 +142,32 @@ debugger;
         that.setState({ cols2: cols2 });
       });
 
+    //云+应用排名
+    let data3 = [];
+    const cols3 = {
 
-
+    };
+    that.setState({ chartdata3: data3 });
+    that.setState({ cols3: cols3 });
+    var formData3 = new FormData();
+    let startTime3 = moment().subtract(31, 'days').format('YYYY-MM-DD');
+    let endTime3 = moment().format('YYYY-MM-DD');
+    formData3.append('startTime', startTime3);
+    formData3.append('endTime', endTime3);
+    const functionData = {
+      method: 'POST',
+      body: formData3
+    };
+    fetch(GetFunctionTopURL, functionData)
+      .then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function (data4) {
+        that.setState({ chartdata3: data4 });
+      });
   }
 
   handleSelectChange = (value) => {
@@ -214,14 +232,6 @@ debugger;
             </div>
           </div>
           <div>
-            {/* <ul className="nav nav-pills" role="tablist">
-                  <li>
-                    <div id="reportrange" className="pull-right">
-                      <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>2017-10-01 - 2017-11-20</span> <b className="caret"></b>
-                    </div>
-                  </li>
-                </ul> */}
             <br />
             <div id="mainChart">
               <h2><center>用户PV趋势图</center></h2>
@@ -233,35 +243,46 @@ debugger;
                 <Geom type='point' position="CreateTime*ViewCount" shape={'circle'} />
               </Chart>
             </div>
-            <div id="sChart">
-              <h2><center>移动设备版本</center></h2>
-              <Chart height={window.innerHeight} data={this.state.chartdata2} scale={this.state.cols2} padding={[80, 100, 80, 80]} forceFit>
-                <Coord type='theta' radius={0.75} />
-                <Axis name="percent" />
-                <Legend position='right' offsetY={-window.innerHeight / 2 + 120} offsetX={-100} />
-                <Tooltip
-                  showTitle={false}
-                  itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
-                />
-                <Geom
-                  type="intervalStack"
-                  position="percent"
-                  color='item'
-                  tooltip={['item*percent', (item, percent) => {
-                    percent = (percent * 100).toFixed(2) + '%';
-                    return {
-                      name: item,
-                      value: percent
-                    };
-                  }]}
-                  style={{ lineWidth: 1, stroke: '#fff' }}
-                >
-                  <Label content='percent' formatter={(val, item) => {
-                    return item.point.item + ': ' + val;
-                  }} />
-                </Geom>
-              </Chart>
-            </div>
+            <Row >
+              <Col span={12} >
+                <h2><center>移动设备对比</center></h2>
+                <Chart height={400} width={400} data={this.state.chartdata2} scale={this.state.cols2} padding={[80, 100, 80, 80]} forceFit>
+                  <Coord type='theta' radius={0.75} />
+                  <Axis name="percent" />
+                  <Legend position='right' offsetY={-window.innerHeight / 2 + 120} offsetX={-100} />
+                  <Tooltip
+                    showTitle={false}
+                    itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+                  />
+                  <Geom
+                    type="intervalStack"
+                    position="percent"
+                    color='item'
+                    tooltip={['item*percent', (item, percent) => {
+                      percent = (percent * 100).toFixed(2) + '%';
+                      return {
+                        name: item,
+                        value: percent
+                      };
+                    }]}
+                    style={{ lineWidth: 1, stroke: '#fff' }}
+                  >
+                    <Label content='percent' formatter={(val, item) => {
+                      return item.point.item + ': ' + item.point.count + '(部)  ' + parseFloat(val).toFixed(2) + '%';
+                    }} />
+                  </Geom>
+                </Chart>
+              </Col>
+              <Col span={12} >
+                <h2><center>云+应用排名(30天)</center></h2>
+                <Chart height={400} data={this.state.chartdata3} scale={this.state.cols3} forceFit>
+                  <Axis name="FunctionName" />
+                  <Axis name="ViewCount" />
+                  <Tooltip crosshairs={{ type: "y" }} />
+                  <Geom color={['#26B99A']} type="interval" position="FunctionName*ViewCount" />
+                </Chart>
+              </Col>
+            </Row>
           </div>
         </div>
       </Content>
