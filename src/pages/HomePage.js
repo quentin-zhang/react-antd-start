@@ -145,7 +145,7 @@ class RegistrationForm extends React.Component {
     //云+应用排名
     let data3 = [];
     const cols3 = {
-
+      'ViewCount': {alias: '访问次数'},
     };
     that.setState({ chartdata3: data3 });
     that.setState({ cols3: cols3 });
@@ -189,7 +189,7 @@ class RegistrationForm extends React.Component {
     ];
     // 数据源
     const cols = {
-      'ViewCount': {},
+      'ViewCount': {alias: '访问次数'},
       'CreateTime': {}
     };
 

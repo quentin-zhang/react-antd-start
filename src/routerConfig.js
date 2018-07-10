@@ -15,6 +15,8 @@ import RouterList from './pages/RouterList';
 import CreateAccount from './pages/CreateAccount';
 import HomePage from './pages/HomePage';
 import CloudPlusEnterprise from './pages/CloudPlusEnterprise';
+import CloudPlusUser from './pages/CloudPlusUser';
+import CPSingleUser from './pages/CPSingleUser';
 
 const routerConfig = [
   {
@@ -31,6 +33,16 @@ const routerConfig = [
         path: '/index/enterprise',
         layout: HeaderAsideResponsiveLayout,
         page: CloudPlusEnterprise,
+      },
+      {
+        path: '/index/cpuser',
+        layout: HeaderAsideResponsiveLayout,
+        page: CloudPlusUser,
+      },
+      {
+        path: '/index/cpuser/:userid',
+        layout: HeaderAsideResponsiveLayout,
+        page: CPSingleUser,
       }
     ],
   },

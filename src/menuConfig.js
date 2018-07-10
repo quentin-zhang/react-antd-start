@@ -37,9 +37,13 @@ const customAsideNavs = [
         path: '/cloudplus/index',
       },
       {
-        name: '客户端版本情况',
+        name: '企业情况',
         path: '/cloudplus/index/enterprise',
       },
+      {
+        name: '用户情况',
+        path: '/cloudplus/index/cpuser',
+      }
     ],
   },
   {
