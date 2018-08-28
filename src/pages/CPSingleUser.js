@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Form, Table, Input, Button, Icon } from 'antd';
+import { Layout, Form, Input, Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import ContentHeader from './../components/ContentHeader';
 import { GetUserPaginationURL, GetUserCountURL } from './../util/const';
@@ -22,7 +22,7 @@ class RegistrationForm extends React.Component {
       pagination: { current: 0 }
     };
   }
-
+  
 
   handleSubmit = (e) => {
     e.preventDefault();

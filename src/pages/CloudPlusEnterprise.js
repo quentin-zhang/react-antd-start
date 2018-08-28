@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Form, Table } from 'antd';
+import { Layout, Form, Table,Input, Button, Icon  } from 'antd';
+import {Link} from 'react-router-dom';
 import ContentHeader from './../components/ContentHeader';
 import { GetEnterpriseDeviceURL } from './../util/const';
 
@@ -18,7 +19,10 @@ class RegistrationForm extends React.Component {
       EnterpriseCount: 0,
       ECMUsers: 0,
       ActiveUserCount: 0,
-      DeviceCount: 0
+      DeviceCount: 0,
+      searchText:"",
+      dataSource:[],
+      searchedDataSource:[]
     };
   }
 
@@ -53,6 +57,10 @@ class RegistrationForm extends React.Component {
     return isSHow;
   }
 
+  onInputChange = (e) => {
+    this.setState({ searchText: e.target.value });
+  }
+
   componentDidMount() {
     let that = this;
 
@@ -65,16 +73,33 @@ class RegistrationForm extends React.Component {
     })
     .then(function (data) {
       that.setState({ dataSource: data });
+      that.setState({ searchedDataSource: data });
     });
   }
 
-
+  searchEP = () => {
+    let searchtxt = this.state.searchText;
+    const reg = new RegExp(searchtxt, 'gi');
+    this.setState({
+      filterDropdownVisible: false,
+      filtered: !!searchtxt,
+      searchedDataSource: this.state.dataSource.map((record) => {
+        const match = record.EnterpriseName.match(reg);
+        if (!match) {
+          return null;
+        }
+        return {
+          ...record
+        };
+      }).filter(record => !!record),
+    });
+  }
 
 
   render() {
     const breadcrumb = [
       { text: '云+分析', link: '' },
-      { text: '企业情况', link: '#/cloudplus/index' }
+      { text: '企业情况', link: '#/cloudplus/index/enterprise' }
     ];
     const columns = [{
       title: '序号',
@@ -90,11 +115,31 @@ class RegistrationForm extends React.Component {
       sorter: function(a, b) {
         return a.EnterpriseName.localeCompare(b.EnterpriseName)
       },
-      filters: [{
-        text: '浪潮集团',
-        value: '浪潮集团',
-      }],
-      onFilter: (value, record) => record.EnterpriseName === value,
+      render: (text, record) => <Link
+      to={{
+        pathname: this.props.match.url + "/" + record.inspur_id,
+        search: '?sort=name&b=123',
+        query: record
+      }}>{text}</Link>,
+      filterDropdown: (
+        <div className="custom-filter-dropdown">
+          <Input
+            ref={ele => this.searchInput = ele}
+            placeholder="企业名称..."
+            value={this.state.searchText}
+            onChange={this.onInputChange}
+            onPressEnter={this.searchEP}
+          />
+          <Button type="primary" onClick={() => this.searchEP()}>搜索</Button>
+        </div>
+      ),
+      filterIcon: <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
+      filterDropdownVisible: this.state.filterDropdownVisible,
+      onFilterDropdownVisibleChange: (visible) => {
+        this.setState({
+          filterDropdownVisible: visible,
+        }, () => this.searchInput && this.searchInput.focus());
+      },
     }, {
       title: '设备数量',
       dataIndex: 'DeviceCount',
@@ -136,7 +181,7 @@ class RegistrationForm extends React.Component {
       <Content className="maincontent fromwarper">
         <ContentHeader datasource={breadcrumb} />
         <div className="pagecontent">
-          <Table dataSource={this.state.dataSource} columns={columns} />
+          <Table dataSource={this.state.searchedDataSource} columns={columns} />
         </div>
       </Content>
     );

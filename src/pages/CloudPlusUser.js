@@ -53,11 +53,6 @@ class RegistrationForm extends React.Component {
     }
     return isSHow;
   }
-  // state = {
-  //   data: [],
-  //   pagination: { current: 0 },
-  //   loading: false,
-  // };
 
   Myfetch = (params = {}) => {
     let that = this;
@@ -65,23 +60,6 @@ class RegistrationForm extends React.Component {
     this.setState({
       filterDropdownVisible: false,
       filtered: !!searchText,
-      // data: resultdata.enterprises.map((record) => {
-      //   const match = record.name.match(reg);
-      //   if (!match) {
-      //     return null;
-      //   }
-      //   return {
-      //     ...record,
-      //     name: (
-      //       <span>
-      //         {record.name.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i')).map((text, i) => (
-      //           text.toLowerCase() === searchText.toLowerCase() ?
-      //             <span key={i} className="highlight">{text}</span> : text // eslint-disable-line
-      //         ))}
-      //       </span>
-      //     ),
-      //   };
-      // }).filter(record => !!record),
     });
 
     var formData = new FormData();
@@ -108,14 +86,12 @@ class RegistrationForm extends React.Component {
         return response.json();
       })
       .then(function (data) {
-        const pagination = { ...that.state.pagination };
-        // Read total count from server
-        // pagination.total = data.totalCount;
-        pagination.total = 200;
+        let paginationP = that.state.pagination;
+        paginationP.total = 200;
         that.setState({
           loading: false,
           data: data,
-          pagination,
+          pagination:paginationP
         });
       })
       .then(function (data) {
@@ -125,17 +101,16 @@ class RegistrationForm extends React.Component {
           })
           .then(function (data) {
             console.log(data);
-            const pagination = { ...that.state.pagination };
-            // // Read total count from server
-            // pagination.total = data.totalCount;
-            pagination.total = data;
+            let paginationC = that.state.pagination ;
+            paginationC.total = data;
+            that.setState
             that.setState({
-              pagination
+              pagination:paginationC
             });
           });
       });
   }
-  searchUser = (searchTextt) => {
+  searchUser = () => {
     this.Myfetch({
       page: 0
     });
@@ -143,7 +118,6 @@ class RegistrationForm extends React.Component {
 
 
   componentDidMount() {
-    // let that = this;
     this.Myfetch({
       page: 0
     });
@@ -182,21 +156,16 @@ class RegistrationForm extends React.Component {
         search: '?sort=name&b=123',
         query: record
       }}>{text}</Link>,
-      // render: name => `${name.first} ${name.last}`,
-      // filters: [
-      //   { text: '仪思奇', value: '仪思奇' },
-      // ],
-      // onFilter: (value, record) => record.real_name === value,
       filterDropdown: (
         <div className="custom-filter-dropdown">
           <Input
             ref={ele => this.searchInput = ele}
-            placeholder="Search name"
+            placeholder="姓名..."
             value={this.state.searchText}
             onChange={this.onInputChange}
             onPressEnter={this.searchUser}
           />
-          <Button type="primary" onClick={() => this.searchUser(this.state.searchText)}>Search</Button>
+          <Button type="primary" onClick={() => this.searchUser()}>搜索</Button>
         </div>
       ),
       filterIcon: <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
