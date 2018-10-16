@@ -141,11 +141,32 @@ class RegistrationForm extends React.Component {
         }, () => this.searchInput && this.searchInput.focus());
       },
     }, {
-      title: '设备数量',
-      dataIndex: 'DeviceCount',
-      key: 'DeviceCount',
+      title: '版本',
+      dataIndex: 'TenantType',
+      key: 'TenantType',
       sorter: function(a, b) {
-        return a.DeviceCount - b.DeviceCount
+        return a.TenantType.localeCompare(b.TenantType)
+      }
+    },{
+      title: '昨日PV',
+      dataIndex: 'PVCount',
+      key: 'PVCount',
+      sorter: function(a, b) {
+        return a.PVCount - b.PVCount
+      }
+    },{
+      title: '昨日活跃用户数',
+      dataIndex: 'ActiveUserCount',
+      key: 'ActiveUserCount',
+      sorter: function(a, b) {
+        return a.ActiveUserCount - b.ActiveUserCount
+      }
+    },{
+      title: '昨日异常',
+      dataIndex: 'ExceptionCount',
+      key: 'ExceptionCount',
+      sorter: function(a, b) {
+        return a.ExceptionCount - b.ExceptionCount
       }
     },{
       title: '用户数量',
@@ -153,27 +174,6 @@ class RegistrationForm extends React.Component {
       key: 'UserCount',
       sorter: function(a, b) {
         return a.UserCount - b.UserCount
-      }
-    },{
-      title: '活跃用户数',
-      dataIndex: 'ActiveUserCount',
-      key: 'ActiveUserCount',
-      sorter: function(a, b) {
-        return a.ActiveUserCount - b.ActiveUserCount
-      }
-    },{
-      title: 'iOS',
-      dataIndex: 'iOSCount',
-      key: 'iOSCount',
-      sorter: function(a, b) {
-        return a.iOSCount - b.iOSCount
-      }
-    },{
-      title: 'Android',
-      dataIndex: 'AndroidCount',
-      key: 'AndroidCount',
-      sorter: function(a, b) {
-        return a.AndroidCount - b.AndroidCount
       }
     }];
 
