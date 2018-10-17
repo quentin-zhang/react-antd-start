@@ -56,3 +56,16 @@ yarn install
   docker build -t uservoice:0.0.1 .
   docker run -it --name uservoice -p 3000:3000 uservoice:0.0.1
 ```
+
+（10）宿主机设置docker国内镜像源
+
+```bash
+vim /etc/docker/daemon.json
+
+{
+"registry-mirrors": ["https://registry.docker-cn.com"] 
+}
+
+sudo systemctl daemon-reload
+sudo service docker restart
+```
