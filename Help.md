@@ -49,4 +49,10 @@ yarn install
   firewall-cmd --reload
 ```
 
-（9）docker 安装 ???
+（9）docker 安装(如果需要容器化)
+
+```bash
+  cd /opt/githubrepository/react-antd-start/
+  docker build -t uservoice:0.0.1 .
+  docker run -it --name uservoice -p 3000:3000 uservoice:0.0.1
+```
