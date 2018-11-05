@@ -117,7 +117,7 @@ class RegistrationForm extends React.Component {
       },
       render: (text, record) => <Link
       to={{
-        pathname: this.props.match.url + "/" + record.inspur_id,
+        pathname: this.props.match.url + "/" + record.id + "/" + record.EnterpriseName ,
         search: '?sort=name&b=123',
         query: record
       }}>{text}</Link>,

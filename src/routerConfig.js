@@ -17,6 +17,7 @@ import HomePage from './pages/HomePage';
 import CloudPlusEnterprise from './pages/CloudPlusEnterprise';
 import CloudPlusUser from './pages/CloudPlusUser';
 import CPSingleUser from './pages/CPSingleUser';
+import SingleEnterprise from './pages/SingleEnterprise';
 
 const routerConfig = [
   {
@@ -33,6 +34,11 @@ const routerConfig = [
         path: '/index/enterprise',
         layout: HeaderAsideResponsiveLayout,
         page: CloudPlusEnterprise,
+      },
+      {
+        path: '/index/enterprise/:id/:enterprisename',
+        layout: HeaderAsideResponsiveLayout,
+        page: SingleEnterprise,
       },
       {
         path: '/index/cpuser',
