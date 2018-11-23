@@ -285,7 +285,6 @@ class RegistrationForm extends React.Component {
           <div className="row top_tiles">
             <div className="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="tile-stats">
-                <div className="icon"><i className="fa fa-institution"></i></div>
                 <div className="count">{this.state.EnterpriseCount}</div>
                 <h3>注册企业数</h3>
                 <p>企业总数.</p>
@@ -293,7 +292,6 @@ class RegistrationForm extends React.Component {
             </div>
             <div className="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="tile-stats">
-                <div className="icon"><i className="fa fa-area-chart"></i></div>
                 <div className="count">{this.state.PVCount}</div>
                 <h3>昨日PV数</h3>
                 <p>昨日PV数.</p>
@@ -301,7 +299,6 @@ class RegistrationForm extends React.Component {
             </div>
             <div className="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="tile-stats">
-                <div className="icon"><i className="fa fa-exclamation"></i></div>
                 <div className="count">{this.state.ExceptionCount}</div>
                 <h3>昨日异常数</h3>
                 <p>昨日异常数.</p>
@@ -309,7 +306,6 @@ class RegistrationForm extends React.Component {
             </div>
             <div className="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="tile-stats">
-                <div className="icon"><i className="fa fa-user"></i></div>
                 <div className="count">{this.state.ActiveUserCount}</div>
                 <h3>昨日活跃用户数</h3>
                 <p>昨日活跃用户数.</p>
@@ -325,8 +321,7 @@ class RegistrationForm extends React.Component {
                 <Axis name="CreateTime" />
                 <Axis name="ViewCount" visible={true} />
                 <Tooltip crosshairs={{ type: "y" }} />
-                <Geom type="area" position="CreateTime*ViewCount" />
-                <Geom type='point' position="CreateTime*ViewCount" shape={'circle'} />
+                <Geom type="line" position="CreateTime*ViewCount" />
               </Chart>
               </Col>
             </Row>
@@ -338,7 +333,6 @@ class RegistrationForm extends React.Component {
                   <Axis name="ExceptionCount" visible={true} />
                   <Tooltip crosshairs={{ type: "y" }} />
                   <Geom color={['#FF6347']} type="line" position="HappenTime*ExceptionCount" />
-                  <Geom color={['#FF6347']} type='point' position="HappenTime*ExceptionCount" shape={'circle'} />
                 </Chart>
               </Col>
             </Row>
@@ -350,7 +344,6 @@ class RegistrationForm extends React.Component {
                   <Axis name="ViewCount" visible={true} />
                   <Tooltip crosshairs={{ type: "y" }} />
                   <Geom color={['#26B99A']} type="line" position="CreateTime*ViewCount" />
-                  <Geom color={['#26B99A']} type='point' position="CreateTime*ViewCount" shape={'circle'} />
                 </Chart>
               </Col>
             </Row>
