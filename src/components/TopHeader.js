@@ -1,54 +1,62 @@
-import React,{Component} from 'react';
-// import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Layout, Menu } from 'antd';
+import React from 'react';
+import { Layout, Menu, Dropdown, Button, Icon, Row, Col } from 'antd'
 const { Header } = Layout;
 
 export default class TopHeader extends React.Component {
+
   render() {
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo')) || {}
+    const roles = []
+    userinfo && userinfo.roles && userinfo.roles.map((item) => {
+      roles.push(item.roleName)
+    })
+    const userCenter = (
+      <Menu className="nav-dropmenu">
+        <Menu.Item key="1">
+          <Icon type="caret-up" />
+          <span className="label">角色： </span><span className="value" title={roles.join(',')}>{roles.join(',') || '管理员'}</span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="2">
+          <span className="label">企业名称： </span><span className="value">{userinfo.policeCode || '浪潮集团'}</span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="3">
+          <span className="label">用户编号： </span><span className="value">{userinfo.duty || '000001'}</span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="4">
+          <Row>
+          <Col span={6}/>
+            <Col span={12}>
+              <Button type="primary" size="small" onClick={this.handleLogout}>退出登录</Button>
+            </Col>
+            <Col span={6}/>
+          </Row>
+        </Menu.Item>
+      </Menu>
+    )
     return (
       <Header className="header topheader">
-        <div className="logo" />
-        {/* <Navbar inverse collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#brand">React-Bootstrap</a>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              <NavItem eventKey={1} href="#">
-                Link
-      </NavItem>
-              <NavItem eventKey={2} href="#">
-                Link
-      </NavItem>
-              <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-              </NavDropdown>
-            </Nav>
-            <Nav pullRight>
-              <NavItem eventKey={1} href="#">
-                Link Right
-      </NavItem>
-              <NavItem eventKey={2} href="#">
-                Link Right
-      </NavItem>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
-        {/* <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          style={{lineHeight: '60px', position: 'fixed', width: '100%', zIndex: 3}}
-        >
-          <Menu.Item key="1">&nbsp;</Menu.Item>
-        </Menu> */}
+        <div className="navbar nav_title">
+          <a href="index.html" className="site_title">
+            <i className="fa fa-paw"></i>
+            <span>用户行为分析</span>
+          </a>
+        </div>
+        <Row className="row">
+           <Col span={23}>
+          </Col>
+          <Col span={1} className="col">
+            <ul>
+              <li>
+                <Dropdown overlay={userCenter}>
+                  <a className="ant-dropdown-link"><Icon type="user" style={{ fontSize: '20px', color: '#fff' }} />{userinfo.chineseName || userinfo.username}</a>
+                </Dropdown>
+              </li>
+            </ul>
+          </Col>
+        </Row>
       </Header>
     );
   }

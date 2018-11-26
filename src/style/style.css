@@ -364,3 +364,11 @@ a.addappbtn:hover {
     height: 60px !important;
     line-height: 60px !important;
 }
+
+.nav_title {
+    width: 230px;
+    float: left;
+    background: #24292e !important;
+    border-radius: 0;
+    height: 57px;
+}
