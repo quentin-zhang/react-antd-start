@@ -186,7 +186,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .maincontent {
-    margin: 0 0px;
+    margin: 0 12px;
     flex: 1;
     min-height: 400px;
     height: 100%;
@@ -201,7 +201,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .pageheader {
-    margin: 0 -20px;
+    margin: 0px 0px 12px 0px ;
     background: #fff;
     padding: 16px 32px 0 32px;
     border-bottom: 1px solid #e8e8e8;
@@ -209,12 +209,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .pagecontent {
     background: #fff;
-    margin-top: 0px;
-    padding: 0px 20px 0px 20px;
+    margin-top: 20px;
+    padding: 20px 30px 20px 30px;
     position: relative;
     z-index: 2;
     overflow-y:hidden;
-    border-left: 1px solid #E4E4E4;
 }
 
 .registerform {
@@ -359,7 +358,7 @@ a.addappbtn:hover {
 } */
 
 .topheader {
-    background: #24292e !important;
+    background: #2A3F54 !important;
     padding: 0px;
     height: 60px !important;
     line-height: 60px !important;
@@ -368,7 +367,28 @@ a.addappbtn:hover {
 .nav_title {
     width: 230px;
     float: left;
-    background: #24292e !important;
+    background: #2A3F54 !important;
     border-radius: 0;
     height: 57px;
+}
+
+/* .card_padding {
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 24px;
+    margin-bottom: 12px;
+}
+
+.top_padding{
+    padding-top: 24px;
+    padding-left: 12px;
+    padding-right: 24px;
+} */
+
+.row_margin{
+    margin-bottom: 12px;
+}
+
+.ant-card-wider-padding .ant-card-body {
+    padding: 24px 12px !important;
 }

@@ -38,20 +38,20 @@ export default class TopHeader extends React.Component {
     )
     return (
       <Header className="header topheader">
-        <div className="navbar nav_title">
-          <a href="index.html" className="site_title">
-            <i className="fa fa-paw"></i>
-            <span>用户行为分析</span>
+        <div className="nav_title">
+          <a href="#" className="site_title">
+            <span style={{ fontSize: '18px', color: '#fff' }}> 用户行为分析系统</span>
           </a>
         </div>
         <Row className="row">
-           <Col span={23}>
+           <Col span={22} >
           </Col>
-          <Col span={1} className="col">
+          <Col span={1} className="text-right"><a href="#"><Icon type="bell"  style={{ fontSize: '18px', color: '#fff' }}/></a></Col>
+          <Col span={1} className="text-center">
             <ul>
               <li>
                 <Dropdown overlay={userCenter}>
-                  <a className="ant-dropdown-link"><Icon type="user" style={{ fontSize: '20px', color: '#fff' }} />{userinfo.chineseName || userinfo.username}</a>
+                  <a className="ant-dropdown-link"><Icon type="user" style={{ fontSize: '18px', color: '#fff' }} />{userinfo.chineseName || userinfo.username}</a>
                 </Dropdown>
               </li>
             </ul>
