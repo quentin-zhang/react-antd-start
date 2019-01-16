@@ -40,7 +40,7 @@ export default class TopHeader extends React.Component {
       <Header className="header topheader">
         <div className="nav_title">
           <a href="#" className="site_title">
-            <span style={{ fontSize: '18px', color: '#fff' }}> 用户行为分析系统</span>
+            <span style={{ fontSize: '18px', color: '#fff' }}> 用户声音</span>
           </a>
         </div>
         <Row className="row">
