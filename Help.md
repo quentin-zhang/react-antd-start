@@ -1,5 +1,18 @@
 # 使用本Ant Design的正确姿势
 
+##快捷方案
+
+```bash
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_11.x | sudo -E bash -
+sudo yum install nodejs
+node -v
+npm -v 
+npm install -g pm2
+pm2 start "npm" --name "law" -- start 
+```
+##正常步骤
+
 （1）设置NPM镜像
 
 ```bash
